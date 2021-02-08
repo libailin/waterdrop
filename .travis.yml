@@ -10,11 +10,19 @@ jdk:
 
 notifications:
   email:
-    - garygaowork@gmail.com
+    - true
 
 # https://travis-ci.community/t/error-installing-oraclejdk8-expected-feature-release-number-in-range-of-9-to-14-but-got-8/3766/8
 dist: trusty
 
+deploy:
+  provider: releases
+  skip_cleanup: true
+  #github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  api_key: ${WD_TOKEN}   # 填写 GitHub 的 token （Settings -> Personal access tokens -> Generate new token）
+  file: app/build/outputs/apk/buff.apk   # 部署文件路径
+  on:
+    branch: master
 
 
 # script: sbt ++$TRAVIS_SCALA_VERSION check-gen-type-classes test
